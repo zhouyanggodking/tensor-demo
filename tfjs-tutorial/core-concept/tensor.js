@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs');
 
 // tensors are immutable
 // tensor

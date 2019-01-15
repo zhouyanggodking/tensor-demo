@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs');
 
 const a = tf.tensor2d([[1, 2], [3, 4]]);
 const a_squared = a.square(); // tf.square(a).print();

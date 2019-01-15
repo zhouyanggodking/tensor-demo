@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs');
 
 // model, conceptually, is a function that given some input will produce some desired output
 

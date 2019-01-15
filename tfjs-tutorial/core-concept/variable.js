@@ -1,4 +1,4 @@
-import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs');
 
 // variables are mutable
 const init = tf.zeros([5]);
