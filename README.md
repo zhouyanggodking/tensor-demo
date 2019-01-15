@@ -1,2 +1,3 @@
-# tensor-demo
-tensor tutorial
+# TensorFlowDemo
+
+##tensorboard --logdir logs
