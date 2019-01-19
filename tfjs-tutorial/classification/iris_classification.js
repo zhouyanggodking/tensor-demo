@@ -43,9 +43,14 @@ function preprocessIrisDataset(dataset, splitRatio = 0.8) {
 function buildModel(trainDatasetLength) {
   const model = tf.sequential();
   model.add(tf.layers.dense({
-    units: 32,
+    units: 100,
     activation: 'sigmoid',
     inputShape: [trainDatasetLength]
+  }));
+
+  model.add(tf.layers.dense({
+    units: 100,
+    activation: 'sigmoid'
   }));
 
   model.add(tf.layers.dense({
