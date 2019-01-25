@@ -50,24 +50,13 @@ async function readMnistImages() {
 
 // readMnistImages()
 
-// sharp(mnisturl).toBuffer().then(buff =>{
-//   console.log(buff.length)
-//   const buffer = buff.slice(0, 784);
-//   console.log(buffer)
-//   console.log(buffer.length)
-//   sharp(buffer).png().toBuffer(b => { // not working
-//     console.log(b)
-//     fs.writeFileSync('king.png', b);
-//   })
-// })
-
 sharp(mnisturl).extract({
-  left: 0,
+  left:0,
   top: 0,
   width: 784,
-  height: 1
-}).png().toBuffer().then(b => {
-  fs.writeFileSync('king.png', b);
+  height: 65000
+}).raw().toBuffer().then(b => {
+  // fs.writeFileSync('king.png', b);
   console.log(b.length)
   // const arr = []
   // let temp = []
@@ -79,6 +68,7 @@ sharp(mnisturl).extract({
   //     temp = []
   //   }
   // }
+  console.log(b)
 })
 
 

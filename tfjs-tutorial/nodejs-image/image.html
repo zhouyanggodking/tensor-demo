@@ -8,14 +8,26 @@
 </head>
 <body>
   <script>    
+    // fetch('https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8').then(res => {
+    //   const t = res.arrayBuffer();
+    //   t.then(data => {
+    //     console.log(data.slice(0, 10))
+
+    //   })
+    // })
+
     const IMAGE_H = 28;
     const IMAGE_W = 28;
     const IMAGE_SIZE = IMAGE_H * IMAGE_W;
     const NUM_CLASSES = 10;
-    const NUM_DATASET_ELEMENTS = 65000;
-    const MNIST_IMAGES_SPRITE_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png';
+    const NUM_DATASET_ELEMENTS = 1;
 
-    // Make a request for the MNIST sprited image.
+    const NUM_TRAIN_ELEMENTS = 55000;
+    const NUM_TEST_ELEMENTS = NUM_DATASET_ELEMENTS - NUM_TRAIN_ELEMENTS;
+
+    const MNIST_IMAGES_SPRITE_PATH = 'mnist_images.png';
+
+
     const img = new Image();
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -28,7 +40,7 @@
         const datasetBytesBuffer =
             new ArrayBuffer(NUM_DATASET_ELEMENTS * IMAGE_SIZE * 4);
 
-        const chunkSize = 5000;
+        const chunkSize = 1;
         canvas.width = img.width;
         canvas.height = chunkSize;
 
@@ -45,16 +57,24 @@
           for (let j = 0; j < imageData.data.length / 4; j++) {
             // All channels hold an equal value since the image is grayscale, so
             // just read the red channel.
-            datasetBytesView[j] = imageData.data[j * 4] / 255;
+            datasetBytesView[j] = imageData.data[j * 4];
           }
         }
-        this.datasetImages = new Float32Array(datasetBytesBuffer);
-
+        let datasetImages = new Float32Array(datasetBytesBuffer);
+        console.log(to2DImageData(datasetImages))
         resolve();
       };
       img.src = MNIST_IMAGES_SPRITE_PATH;
     });
 
+    function to2DImageData(image_data_1d) {
+      if (image_data_1d.length !== IMAGE_SIZE) {
+        throw new Error('image data length doesn\'t match');    
+      }
+
+      const imageRows = new Array(IMAGE_H).fill(0);
+      return imageRows.map((_, rowIndex) => image_data_1d.slice(rowIndex * IMAGE_W, (rowIndex + 1) * IMAGE_W));  
+    }
   </script>
 </body>
 </html>
