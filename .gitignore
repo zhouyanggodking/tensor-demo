@@ -106,3 +106,4 @@ venv.bak/
 logs/
 MNIST_data/
 node_modules
+keras/train
